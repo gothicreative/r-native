@@ -44,20 +44,16 @@ const startServer = async () => {
   try {
     await connectDB();
     
-    // Normalize port and start the server
-    const port = Number(ENV.PORT) || 3000;
-    const server = app.listen(port, () => {
-      console.log(`Server is running on port ${port}`);
-    });
-    // Handle async errors from the HTTP server
-    server.on('error', (err) => {
-      console.error('HTTP server error:', err);
-      if (process.env.NODE_ENV !== 'test') process.exit(1);
-    });
-    // Return for testability / graceful shutdown
-    return server;
-  } catch (error) {    console.log("Error starting server:", error.message);
-    process.exit(1);
+    if(ENV.NODE_ENV !=="production"){
+      app.listen(ENV.PORT, ()=> console.log("server is up and running on ", ENV.PORT))
+    }
+    
+    }
+  catch (error){
+    console.error("failed to start server", error.message)
+    process.exit(1)
   }
 }
 startServer();
+
+export default app;
