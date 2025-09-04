@@ -9,4 +9,5 @@ export const connectDB = async () => {
         console.log("error to connect DB",error);
         process.exit(1);
     }
+    
     }

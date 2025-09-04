@@ -2,71 +2,64 @@ import asyncHandler from "express-async-handler";
 import User from "../models/user.model.js";
 import Notification from "../models/notification.model.js";
 
-import { clerkClient, getAuth } from "@clerk/express";
+import { getAuth } from "@clerk/express";
+import { clerkClient } from "@clerk/express";
 
 export const getUserProfile = asyncHandler(async (req, res) => {
-    const { username } = req.params;
-    const user = await User.findOne({ username });
-    if (!user) { 
-       return res.status(404).json({error: "User not found"});
-    }
-    // Logic to fetch user profile by username
-    res.status(200).json({ user });
+  const { username } = req.params;
+  const user = await User.findOne({ username });
+  if (!user) return res.status(404).json({ error: "User not found" });
 
+  res.status(200).json({ user });
 });
 
 export const updateProfile = asyncHandler(async (req, res) => {
+  const { userId } = getAuth(req);
 
-    const {userId} = getAuth(req);
+  const user = await User.findOneAndUpdate({ clerkId: userId }, req.body, { new: true });
 
-    const user = await User.findOneAndUpdate(
+  if (!user) return res.status(404).json({ error: "User not found" });
 
-        {clerkId: userId}, req.body,{new: true}
-
-    ); 
-
-    if (!user) {
-        return res.status(404).json({error: "User not found"});
-    }
-    res.status(200).json({ user });
+  res.status(200).json({ user });
 });
 
 export const syncUser = asyncHandler(async (req, res) => {
-    const {userId} = getAuth(req);
+  const { userId } = getAuth(req);
 
-    const existingUser = await User.findOne({ clerkId: userId});
-    if ( existingUser ) {
-        return res.status(200).json({user: existingUser, message:"user already exist"});
+  // check if user already exists in mongodb
+  const existingUser = await User.findOne({ clerkId: userId });
+  if (existingUser) {
+    return res.status(200).json({ user: existingUser, message: "User already exists" });
+  }
 
-    }
-const clerkUser = await clerkClient.users.getUser(userId)
+  // create new user from Clerk data
+  const clerkUser = await clerkClient.users.getUser(userId);
 
-const userData = {
+  const userData = {
     clerkId: userId,
     email: clerkUser.emailAddresses[0].emailAddress,
     firstName: clerkUser.firstName || "",
     lastName: clerkUser.lastName || "",
     username: clerkUser.emailAddresses[0].emailAddress.split("@")[0],
     profilePicture: clerkUser.imageUrl || "",
+  };
 
-};
- 
-const user = await User.create(userData);
+  const user = await User.create(userData);
 
-res.status(201).json ({ user, message: "user created successfully"});
+  res.status(201).json({ user, message: "User created successfully" });
 });
 
-export const getCurrentUser = asyncHandler(async (req, res) =>{
-    const { userId } = getAuth(req);
-    const user = await User.findOne({clerkId: userId});
+export const getCurrentUser = asyncHandler(async (req, res) => {
+  const { userId } = getAuth(req);
+  const user = await User.findOne({ clerkId: userId });
 
-    if(!user) return res.status(404).json({error: "user not found"});
+  if (!user) return res.status(404).json({ error: "User not found" });
 
-    res.status(200).json({ user });
-})
+  res.status(200).json({ user });
+});
 
-export const followUser = asyncHandler(async (req, res)=>{
-      const { userId } = getAuth(req);
+export const followUser = asyncHandler(async (req, res) => {
+  const { userId } = getAuth(req);
   const { targetUserId } = req.params;
 
   if (userId === targetUserId) return res.status(400).json({ error: "You cannot follow yourself" });
@@ -106,5 +99,4 @@ export const followUser = asyncHandler(async (req, res)=>{
   res.status(200).json({
     message: isFollowing ? "User unfollowed successfully" : "User followed successfully",
   });
- 
-})
+});
