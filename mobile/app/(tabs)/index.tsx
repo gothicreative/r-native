@@ -6,7 +6,7 @@ import SignOutButton from '@/component/signOutButton'
 import { Ionicons } from "@expo/vector-icons";
 import PostComposer from '@/component/PostComposer';
 import { useState } from 'react';
-// import PostsList from "@/components/PostsList";
+import PostsList from "@/component/postList";
 
 
 
@@ -44,7 +44,7 @@ const HomeScreen = ()=>{
         }
       >
         <PostComposer />
-        {/* <PostsList /> */}
+        <PostsList />
       </ScrollView>
 
       </SafeAreaView>
