@@ -4,6 +4,9 @@ import { Feather } from "@expo/vector-icons";
 import { View, Text, Image, TextInput, TouchableOpacity, ActivityIndicator } from "react-native";
 
 const PostComposer = () => {
+
+  const { user } = useUser();
+
   const {
     content,
     setContent,
@@ -15,7 +18,6 @@ const PostComposer = () => {
     createPost,
   } = useCreatePost();
 
-  const { user } = useUser();
 
   return (
     <View className="border-b border-gray-100 p-4 bg-white">
