@@ -17,6 +17,7 @@ router.get("/", getPosts);
 router.get("/:postId", getPost);
 router.get("/user/:username", getUserPosts);
 
+
 // protected proteced
 router.post("/", protectRoute, upload.single("image"), createPost);
 router.post("/:postId/like", protectRoute, likePost);

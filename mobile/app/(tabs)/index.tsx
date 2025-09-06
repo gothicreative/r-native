@@ -17,11 +17,14 @@ const HomeScreen = ()=>{
   const handlePullToRefresh = async () => {
     setIsRefetching(true);
 
+ 
+
+
     await refetchPosts();
     setIsRefetching(false);
   };
+   useUserSync();
 
-  useUserSync();
 
     return (
 

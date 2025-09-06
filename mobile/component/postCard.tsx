@@ -38,11 +38,12 @@ const PostCard = ({ currentUser, onDelete, onLike, post, isLiked, onComment }: P
           <View className="flex-row items-center justify-between mb-1">
             <View className="flex-row items-center">
               <Text className="font-bold text-gray-900 mr-1">
-                {post.user.firstName} {post.user.lastName}
-              </Text>
-              <Text className="text-gray-500 ml-1">
-                @{post.user.username} .  {formatDate(post.createdAt)}
-              </Text>
+                 {post.user.firstName ?? ""}  {post.user.lastName ?? ""}
+               </Text>
+               <Text className="text-gray-500 ml-1">
+                 @{post.user.username ?? "unknown"} .  {formatDate(post.createdAt) }
+               </Text>
+
             </View>
             {isOwnPost && (
               <TouchableOpacity onPress={handleDelete}>
@@ -57,7 +58,7 @@ const PostCard = ({ currentUser, onDelete, onLike, post, isLiked, onComment }: P
 
           {post.image && (
             <Image
-              source={{ uri: post.image }}
+              source={{ uri:post.image }}
               className="w-full h-48 rounded-2xl mb-3"
               resizeMode="cover"
             />
