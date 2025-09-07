@@ -41,8 +41,13 @@ const PostComposer = () => {
           <View className="relative">
             <Image
               source={{ uri: selectedImage }}
-              className="w-full h-48 rounded-2xl"
-              resizeMode="cover"
+              // className="w-full h-48 rounded-2xl"
+              style={{
+                 width: "100%",      // w-full
+                   height: 192,        // h-48 → 48 * 4px
+                borderRadius: 16,   // rounded-2xl → 16px
+              }}
+              resizeMode="contain"
             />
             <TouchableOpacity
               className="absolute top-2 right-2 w-8 h-8 bg-black bg-opacity-60 rounded-full items-center justify-center"

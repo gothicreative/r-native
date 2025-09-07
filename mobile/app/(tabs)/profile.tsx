@@ -1,12 +1,12 @@
-// import { Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 
-// const profileScreen = ()=>{
+const profileScreen = ()=>{
   
-//     return (
-//       <View>
-//         <Text> profile </Text>
-//       </View>
-//     )
+    return (
+      <View>
+        <Text> profile </Text>
+      </View>
+    )
   
-// }
-// export default profileScreen
+}
+export default profileScreen

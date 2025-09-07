@@ -63,10 +63,16 @@ const CommentsModal = ({ selectedPost, onClose }: CommentsModalProps) => {
 
                 {selectedPost.image && (
                   <Image
-                    source={{ uri: selectedPost.image }}
-                    className="w-full h-48 rounded-2xl mb-3"
-                    resizeMode="cover"
-                  />
+                   source={{ uri: selectedPost.image }}
+                   style={{
+                     width: "100%",        // w-full
+                     height: 192,          // h-48 → 48 * 4px
+                     borderRadius: 16,     // rounded-2xl → 16px
+                     marginBottom: 12,     // mb-3 → 3 * 4px
+                     alignSelf: "flex-start", // align image to the right
+                   }}
+                   resizeMode="contain"
+                 />
                 )}
               </View>
             </View>

@@ -2,7 +2,7 @@ import { Post, User } from "@/types";
 import { formatDate, formatNumber } from "@/utils/formatters";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import { View, Text, Alert, Image, TouchableOpacity } from "react-native";
-
+import { Dimensions } from "react-native";
 interface PostCardProps {
   post: Post;
   onLike: (postId: string) => void;
@@ -14,7 +14,7 @@ interface PostCardProps {
 
 const PostCard = ({ currentUser, onDelete, onLike, post, isLiked, onComment }: PostCardProps) => {
   const isOwnPost = post.user._id === currentUser._id;
-
+const screenWidth = Dimensions.get("window").width;
   const handleDelete = () => {
     Alert.alert("Delete Post", "Are you sure you want to delete this post?", [
       { text: "Cancel", style: "cancel" },
@@ -30,8 +30,14 @@ const PostCard = ({ currentUser, onDelete, onLike, post, isLiked, onComment }: P
     <View className="border-b border-gray-100 bg-white">
       <View className="flex-row p-4">
         <Image
-          source={{ uri: post.user.profilePicture || "" }}
-          className="w-12 h-12 rounded-full mr-3"
+          source={{ uri: post.user.profilePicture }}
+          style={{
+            width: 48,        // w-12 → 12 * 4px
+            height: 48,       // h-12 → 12 * 4px
+            borderRadius: 24, // rounded-full → half of width/height
+            marginRight: 12,  // mr-3 → 3 * 4px
+              }}
+          // className="w-12 h-12 rounded-full mr-3"
         />
 
         <View className="flex-1">
@@ -41,7 +47,7 @@ const PostCard = ({ currentUser, onDelete, onLike, post, isLiked, onComment }: P
                  {post.user.firstName ?? ""}  {post.user.lastName ?? ""}
                </Text>
                <Text className="text-gray-500 ml-1">
-                 @{post.user.username ?? "unknown"} .  {formatDate(post.createdAt) }
+                 @{post.user.username ?? "unknown"}{" • "}{formatDate(post.createdAt) }
                </Text>
 
             </View>
@@ -57,11 +63,19 @@ const PostCard = ({ currentUser, onDelete, onLike, post, isLiked, onComment }: P
           )}
 
           {post.image && (
-            <Image
-              source={{ uri:post.image }}
-              className="w-full h-48 rounded-2xl mb-3"
-              resizeMode="cover"
-            />
+          <Image
+            source={{ uri: post.image }}
+            style={{
+              width: screenWidth, // full screen width
+              padding: 20,
+              height: 500, // let RN calculate height based on aspect ratio
+              aspectRatio: 1, // default aspect ratio, will adjust later
+              alignSelf: "flex-start", // center image horizontally
+              borderRadius: 40,
+              marginBottom: 10,
+            }}
+            resizeMode="cover" // show full image without cropping
+          />
           )}
 
           <View className="flex-row justify-between max-w-xs">

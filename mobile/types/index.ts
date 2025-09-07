@@ -43,4 +43,5 @@ export interface Notification {
     content: string;
   };
   createdAt: string;
+  // isRead?: boolean; // ✅ add this field
 }

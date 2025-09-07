@@ -24,10 +24,7 @@ export default function Index() {
               onPress={() => handleSocialAuth("oauth_google")}
               disabled={isLoading}
               style={{
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: 1 },
-                shadowOpacity: 0.1,
-                shadowRadius: 2,
+               boxShadow: "0px 1px 2px rgba(0,0,0,0.1)",
                 elevation: 2,
               }}
             >
@@ -51,10 +48,7 @@ export default function Index() {
               onPress={() => handleSocialAuth("oauth_apple")}
               disabled={isLoading}
               style={{
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: 1 },
-                shadowOpacity: 0.1,
-                shadowRadius: 2,
+                boxShadow: "0px 1px 2px rgba(0,0,0,0.1)",
                 elevation: 2,
               }}
             >
@@ -74,12 +68,12 @@ export default function Index() {
           </View>
 
           {/* Terms and Privacy */}
-          <Text className="text-center text-gray-500 text-xs leading-4 mt-6 px-2">By signing up, you agree to our <Text className="text-blue-500">Terms</Text>
+          {/* <Text className="text-center text-gray-500 text-xs leading-4 mt-6 px-2">By signing up, you agree to our <Text className="text-blue-500">Terms</Text>
             {", "}
             <Text className="text-blue-500">Privacy Policy</Text>
             {", and "}
             <Text className="text-blue-500">Cookie Use</Text>.
-          </Text>
+          </Text> */}
         </View>
       </View>
     </View>
