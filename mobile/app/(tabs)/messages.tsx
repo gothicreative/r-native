@@ -141,7 +141,12 @@ const MessagesScreen = () => {
               </TouchableOpacity>
               <Image
                 source={{ uri: selectedConversation.user.avatar }}
-                className="size-10 rounded-full mr-3"
+                 style={{
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 12,
+  }}
               />
               <View className="flex-1">
                 <View className="flex-row items-center">
