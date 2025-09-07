@@ -43,10 +43,10 @@ const PostComposer = () => {
               source={{ uri: selectedImage }}
               // className="w-full h-48 rounded-2xl"
               style={{
-  width: "100%",      // w-full
-  height: 192,        // h-48 → 48 * 4px
-  borderRadius: 16,   // rounded-2xl → 16px
-}}
+                 width: "100%",      // w-full
+                   height: 192,        // h-48 → 48 * 4px
+                borderRadius: 16,   // rounded-2xl → 16px
+              }}
               resizeMode="contain"
             />
             <TouchableOpacity

@@ -88,11 +88,11 @@ const NotificationCard = ({ notification, onDelete }: NotificationCardProps) => 
                   source={{ uri: notification.post.image }}
                   // className="w-full h-32 rounded-lg mt-2"
                   style={{
-  width: "100%",      // w-full
-  height: 400,        // h-32 → 32 * 4px
-  borderRadius: 8,    // rounded-lg → 8px
-  marginTop: 8,       // mt-2 → 2 * 4px
-}}
+                      width: "100%",      // w-full
+                      height: 400,        // h-32 → 32 * 4px
+                      borderRadius: 8,    // rounded-lg → 8px
+                      marginTop: 8,       // mt-2 → 2 * 4px
+                    }}
                   resizeMode="contain"
                 />
               )}

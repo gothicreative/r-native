@@ -32,11 +32,11 @@ const screenWidth = Dimensions.get("window").width;
         <Image
           source={{ uri: post.user.profilePicture }}
           style={{
-  width: 48,        // w-12 → 12 * 4px
-  height: 48,       // h-12 → 12 * 4px
-  borderRadius: 24, // rounded-full → half of width/height
-  marginRight: 12,  // mr-3 → 3 * 4px
-}}
+            width: 48,        // w-12 → 12 * 4px
+            height: 48,       // h-12 → 12 * 4px
+            borderRadius: 24, // rounded-full → half of width/height
+            marginRight: 12,  // mr-3 → 3 * 4px
+              }}
           // className="w-12 h-12 rounded-full mr-3"
         />
 

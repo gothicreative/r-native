@@ -142,11 +142,11 @@ const MessagesScreen = () => {
               <Image
                 source={{ uri: selectedConversation.user.avatar }}
                  style={{
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    marginRight: 12,
-  }}
+                      width: 40,
+                      height: 40,
+                      borderRadius: 20,
+                      marginRight: 12,
+                    }}
               />
               <View className="flex-1">
                 <View className="flex-row items-center">
